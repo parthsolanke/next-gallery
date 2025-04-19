@@ -9,6 +9,15 @@ export const metadata: Metadata = {
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
+function NavBar() {
+	return (
+		<nav className="flex justify-between items-center p-4 mb-6 border-b text-xl font-semibold">
+			<div>Gallery</div>
+			<div>Sign In</div>
+		</nav>
+	);
+}
+
 const geist = Geist({
 	subsets: ["latin"],
 	variable: "--font-geist-sans",
@@ -19,7 +28,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en" className={`${geist.variable}`}>
-			<body>{children}</body>
+			<body >
+				<NavBar />
+				{children}
+			</body>
 		</html>
 	);
 }
