@@ -10,15 +10,16 @@ import type { AdapterAccount } from "next-auth/adapters";
  */
 export const createTable = pgTableCreator((name) => `next-gallery_${name}`);
 
-export const posts = createTable(
-	"post",
+export const images = createTable(
+	"image",
 	(d) => ({
 		id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
-		name: d.varchar({ length: 256 }),
-		createdById: d
-			.varchar({ length: 255 })
-			.notNull()
-			.references(() => users.id),
+		name: d.varchar({ length: 256 }).notNull(),
+		url: d.varchar({ length: 1024 }).notNull(),
+		// createdById: d
+		// 	.varchar({ length: 255 })
+		// 	.notNull()
+		// 	.references(() => users.id),
 		createdAt: d
 			.timestamp({ withTimezone: true })
 			.default(sql`CURRENT_TIMESTAMP`)
@@ -26,7 +27,7 @@ export const posts = createTable(
 		updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
 	}),
 	(t) => [
-		index("created_by_idx").on(t.createdById),
+		// index("created_by_idx").on(t.createdById),
 		index("name_idx").on(t.name),
 	],
 );

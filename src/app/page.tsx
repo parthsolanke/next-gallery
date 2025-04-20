@@ -1,24 +1,20 @@
 import { index } from "drizzle-orm/gel-core";
 import Link from "next/link";
 import Image from "next/image";
+import { db } from "@/server/db"
 
-const mockUrls = [
-	"https://4uxz46kpzp.ufs.sh/f/Z16cUGgPyvHnvZO5DocFqoGUiNPkrdsOV4hn7XgM5WbQSxC3",
-	"https://4uxz46kpzp.ufs.sh/f/Z16cUGgPyvHnvY2JiVcFqoGUiNPkrdsOV4hn7XgM5WbQSxC3",
-	"https://4uxz46kpzp.ufs.sh/f/Z16cUGgPyvHn1Abmsb2FMbBc2Eu5KWpv7GXDw4zLsrgeQ6kI",
-]
+// export const dynamic = "force-dynamic";
 
-const mockImages = mockUrls.map((url, index) => ({
-	id: index + 1,
-	url: url,
-}));
+export default async function HomePage() {
+	const images = await db.query.images.findMany({
+		orderBy: (model, { desc }) => desc(model.id),
+	});
 
-export default function HomePage() {
 	return (
 		<main>
 			<div className="flex flex-wrap gap-4">
-				{[ ...mockImages, ...mockImages, ...mockImages, ...mockImages].map((image, index) => (
-						<div key={image.id + '-' + index} className="w-48">
+				{[ ...images, ...images, ...images, ...images].map((image, index) => (
+						<div key={image.id + '-' + index} className="flex flex-col w-48">
 							<Image
 								src={image.url}
 								alt="image"
@@ -26,6 +22,7 @@ export default function HomePage() {
 								height={200}
 								loading="lazy"
 							/>
+							<div>{image.name}</div>
 						</div>
 					))}
 			</div>
