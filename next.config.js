@@ -7,7 +7,12 @@ import "./src/env.js";
 /** @type {import("next").NextConfig} */
 const config = {
     images: {
-      domains: ['4uxz46kpzp.ufs.sh'],
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '4uxz46kpzp.ufs.sh',
+        },
+      ],
     },
   };
 
