@@ -1,4 +1,5 @@
 import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
+import { UploadButtonWrapper } from "./UploadButtonWrapper";
 
 export function NavBar() {
     return (
@@ -10,7 +11,10 @@ export function NavBar() {
                 </SignedOut>
 
                 <SignedIn>
-                    <UserButton />
+                    <div className="flex items-center gap-4">
+                        <UploadButtonWrapper />
+                        <UserButton />
+                    </div>
                 </SignedIn>
             </div>
         </nav>
