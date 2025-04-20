@@ -4,12 +4,11 @@ import { index } from "drizzle-orm/gel-core";
 import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/server/db"
-import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs"
+import { SignedOut, SignedIn } from "@clerk/nextjs"
+import { getMyImages } from "@/server/queries";
 
 async function Images() {
-	const images = await db.query.images.findMany({
-		orderBy: (model, { desc }) => desc(model.id),
-	});
+	const images = await getMyImages();
 
 	return (
 		<div className="flex flex-wrap gap-4">
@@ -30,9 +29,6 @@ async function Images() {
 }
 
 export default async function HomePage() {
-	const images = await db.query.images.findMany({
-		orderBy: (model, { desc }) => desc(model.id),
-	});
 
 	return (
 		<main>
