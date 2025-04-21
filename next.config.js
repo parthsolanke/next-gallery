@@ -14,6 +14,12 @@ const coreConfig = {
         },
       ],
     },
+
+    logging: {
+      incomingRequests: {
+        ignore: [/\/enc\.js$/],
+      },
+    },
   };
 
 import { withSentryConfig } from "@sentry/nextjs";

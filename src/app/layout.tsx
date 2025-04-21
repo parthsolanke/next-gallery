@@ -23,7 +23,11 @@ const geist = Geist({
 
 export default function RootLayout({
 	children,
-}: Readonly<{ children: React.ReactNode }>) {
+	modal,
+  }: {
+	children: React.ReactNode;
+	modal: React.ReactNode;
+  }) {
 	return (
 		<ClerkProvider>
 		<html lang="en" className={`${geist.variable}`}>
@@ -36,10 +40,11 @@ export default function RootLayout({
 			 */
 			routerConfig={extractRouterConfig(ourFileRouter)}
 			/>
-			<body >
-				<NavBar />
-				{children}
-			</body>
+				<body>
+					<NavBar />
+					{children}
+					{modal}
+				</body>
 		</html>
 		</ClerkProvider>
 	);
