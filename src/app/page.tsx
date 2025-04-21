@@ -8,26 +8,29 @@ import { SignedOut, SignedIn } from "@clerk/nextjs"
 import { getMyImages } from "@/server/queries";
 
 async function Images() {
-	const images = await getMyImages();
+  const images = await getMyImages();
 
-	return (
-		<div className="flex flex-wrap gap-4 justify-center">
-		{images.map((image) => (
-				<div key={image.id} className="flex flex-col w-48 h-48">
-				<Link href={`/img/${image.id}`}>
-					<Image
-					src={image.url}
-					style={{ objectFit: "contain" }}
-					width={192}
-					height={192}
-					alt={image.name}
-					/>
-				</Link>
-					<div>{image.name}</div>
-				</div>
-			))}
-		</div>
-	)
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+      {images.map((image) => (
+        <div key={image.id} className="group relative bg-card overflow-hidden">
+          <div className="aspect-square relative">
+            <Link href={`/img/${image.id}`}>
+              <Image
+                src={image.url}
+                fill
+                className="object-cover hover:opacity-90 transition-opacity"
+                alt={image.name}
+              />
+            </Link>
+          </div>
+          <div className="p-2 text-sm truncate text-center bg-black/50 absolute bottom-0 w-full">
+            {image.name}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default async function HomePage() {

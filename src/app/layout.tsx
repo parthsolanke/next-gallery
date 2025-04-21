@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import "@uploadthing/react/styles.css";
 
-
+import { Toaster } from "@/components/ui/sonner"
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs'
@@ -40,13 +40,14 @@ export default function RootLayout({
 			 */
 			routerConfig={extractRouterConfig(ourFileRouter)}
 			/>
-					<body className="min-h-screen">
+					<body className="min-h-screen dark">
 					<div className="grid h-screen grid-rows-[auto,1fr]">
 						<NavBar />
 						<main className="overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">{children}</main>
 						{modal}
 					</div>
 						<div id="modal-root"></div>
+						<Toaster />
 					</body>
 		</html>
 		</ClerkProvider>
