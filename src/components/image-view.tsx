@@ -1,7 +1,10 @@
 import { getImageById } from "@/server/queries";
+import { clerkClient } from "@clerk/nextjs/server";
 
 export default async function FullImageView(props: {id: number}) {
   const image = await getImageById(props.id);
+  const clerk = await clerkClient();
+  const uploaderInfo = await clerk.users.getUser(image.createdById);
   
   return (
     <div className="flex flex-col md:flex-row h-full w-full max-w-7xl mx-auto gap-8 p-6 items-center justify-center min-h-screen">
@@ -15,9 +18,12 @@ export default async function FullImageView(props: {id: number}) {
       <div className="flex flex-col gap-6 w-full md:w-1/3 p-4 items-center text-center">
         <h2 className="text-2xl font-bold text-white/90">{image.name}</h2>
         <div className="mt-auto">
-          <p className="text-sm text-white/70">
+          <p className="text-white">
             Upload date: {new Date(image.createdAt).toLocaleDateString()}
           </p>
+            <p className=" text-white">
+                Uploaded by: {uploaderInfo.fullName}    
+            </p>
         </div>
       </div>
     </div>

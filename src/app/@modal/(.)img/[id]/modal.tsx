@@ -33,9 +33,15 @@ export function Modal({ children }: { children: React.ReactNode }) {
   return createPortal(
     <dialog
       ref={dialogRef}
-      className="absolute h-screen w-screen bg-zinc-900/50"
+      className="absolute h-screen w-screen bg-black/80"
       onClose={onDismiss}
     >
+      <button
+        onClick={onDismiss}
+        className="absolute top-4 right-4 p-2 text-white hover:opacity-75"
+      >
+        ✕
+      </button>
       {children}
     </dialog>,
     document.getElementById('modal-root')!
