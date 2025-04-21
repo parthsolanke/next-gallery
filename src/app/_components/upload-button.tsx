@@ -4,6 +4,7 @@ import { useUploadThing } from "@/utils/uploadthing";
 import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner"
 import { toast } from "sonner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
@@ -43,10 +44,16 @@ export function UploadButton() {
     const router = useRouter();
     const { inputProps } = useUploadThingInputProps("imageUploader", {
         onUploadBegin() {
-            toast("Uploading...", {
-                id: "uploading",
-                duration: Infinity,
-            })
+            toast(
+                <div className="flex items-center">
+                    <LoadingSpinner className="mr-2" />
+                    <span>Uploading...</span>
+                </div>,
+                {
+                    id: "uploading",
+                    duration: Infinity,
+                }
+            );
         },
         onClientUploadComplete(res) {
             toast.dismiss("uploading");

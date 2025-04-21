@@ -6,28 +6,20 @@ import Image from "next/image";
 import { db } from "@/server/db"
 import { SignedOut, SignedIn } from "@clerk/nextjs"
 import { getMyImages } from "@/server/queries";
+import { ImageCard } from "./_components/image-card";
 
 async function Images() {
   const images = await getMyImages();
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 pt-0">
       {images.map((image) => (
-        <div key={image.id} className="group relative bg-card overflow-hidden">
-          <div className="aspect-square relative">
-            <Link href={`/img/${image.id}`}>
-              <Image
-                src={image.url}
-                fill
-                className="object-cover hover:opacity-90 transition-opacity"
-                alt={image.name}
-              />
-            </Link>
-          </div>
-          <div className="p-2 text-sm truncate text-center bg-black/50 absolute bottom-0 w-full">
-            {image.name}
-          </div>
-        </div>
+        <ImageCard 
+          key={image.id}
+          id={image.id}
+          url={image.url}
+          name={image.name}
+        />
       ))}
     </div>
   );
