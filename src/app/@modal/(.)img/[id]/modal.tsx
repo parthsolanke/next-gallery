@@ -38,7 +38,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
     >
       <button
         onClick={onDismiss}
-        className="absolute top-4 right-4 p-2 text-white hover:opacity-75"
+        className="absolute top-4 right-4 p-2 text-white hover:opacity-75 cursor-pointer"
       >
         ✕
       </button>
