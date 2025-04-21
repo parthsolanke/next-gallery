@@ -40,12 +40,14 @@ export default function RootLayout({
 			 */
 			routerConfig={extractRouterConfig(ourFileRouter)}
 			/>
-				<body>
-					<NavBar />
-					{children}
-					{modal}
-					<div id="modal-root"></div>
-				</body>
+					<body className="min-h-screen">
+					<div className="grid h-screen grid-rows-[auto,1fr]">
+						<NavBar />
+						<main className="overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">{children}</main>
+						{modal}
+					</div>
+						<div id="modal-root"></div>
+					</body>
 		</html>
 		</ClerkProvider>
 	);
