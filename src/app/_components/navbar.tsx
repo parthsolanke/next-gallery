@@ -8,7 +8,9 @@ export function NavBar() {
             <Link href="/">Gallery</Link>
             <div className="flex flex-row gap-4 items-center">
                 <SignedOut>
-                    <SignInButton />
+                    <SignInButton>
+                        <button className="cursor-pointer">Sign in</button>
+                    </SignInButton>
                 </SignedOut>
 
                 <SignedIn>

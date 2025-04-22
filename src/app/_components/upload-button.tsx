@@ -43,11 +43,11 @@ function UploadSVG() {
 export function UploadButton() {
     const router = useRouter();
     const { inputProps } = useUploadThingInputProps("imageUploader", {
-        onUploadBegin() {
+        onUploadBegin(fileName) {
             toast(
                 <div className="flex items-center gap-2 text-white">
                     <LoadingSpinner /> 
-                    <span>Uploading...</span>
+                    <span>Uploading {fileName}...</span>
                 </div>,
                 {
                     id: "uploading",
@@ -60,7 +60,22 @@ export function UploadButton() {
             toast.success("Upload complete!");
 
             router.refresh();
-        }
+        },
+        onUploadError(error) {
+            toast.dismiss("uploading");
+            
+            let errorMessage = "Upload failed! ";
+            
+            if (error.message === "Invalid config: FileCountMismatch") {
+                errorMessage = "You can only upload up to 5 files at a time.";
+            } else if (error.message === "Invalid config: FileSizeMismatch") {
+                errorMessage = "Files must be smaller than 4MB.";
+            } else {
+                errorMessage += error.message;
+            }
+            
+            toast.error(errorMessage);
+        },
     });
 
     return (
