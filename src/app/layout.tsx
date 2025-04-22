@@ -40,15 +40,24 @@ export default function RootLayout({
 			 */
 			routerConfig={extractRouterConfig(ourFileRouter)}
 			/>
-					<body className="min-h-screen dark">
-					<div className="grid h-screen grid-rows-[auto,1fr]">
-						<NavBar />
-						<main className="overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">{children}</main>
-						{modal}
-					</div>
-						<div id="modal-root"></div>
-						<Toaster />
-					</body>
+			<body className="flex flex-col h-screen dark">
+				<NextSSRPlugin
+					routerConfig={extractRouterConfig(ourFileRouter)}
+				/>
+
+				<header className="sticky top-0 z-20">
+					<NavBar />
+				</header>
+
+				<main className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-width-none">
+					{children}
+					{modal}
+				</main>
+
+
+				<div id="modal-root"></div>
+				<Toaster />
+        	</body>
 		</html>
 		</ClerkProvider>
 	);
