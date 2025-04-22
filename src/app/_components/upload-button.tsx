@@ -45,8 +45,8 @@ export function UploadButton() {
     const { inputProps } = useUploadThingInputProps("imageUploader", {
         onUploadBegin() {
             toast(
-                <div className="flex items-center">
-                    <LoadingSpinner className="mr-2" />
+                <div className="flex items-center gap-2 text-white">
+                    <LoadingSpinner /> 
                     <span>Uploading...</span>
                 </div>,
                 {
