@@ -15,7 +15,7 @@ export default async function FullImageView(props: {id: number}) {
           className="max-h-[80vh] w-full h-full object-contain"
         />
       </div>
-      <div className="flex flex-col gap-6 w-full md:w-1/3 p-4 items-center text-center">
+      <div className="flex flex-col gap-4 w-full md:w-1/3 p-4 items-center text-center">
         <h2 className="text-2xl font-bold text-white/90">{image.name}</h2>
         <div className="mt-auto">
           <p className="text-white">

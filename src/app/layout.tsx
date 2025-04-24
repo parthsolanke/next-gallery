@@ -9,6 +9,7 @@ import { NavBar } from "./_components/navbar";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { PostHogProvider } from './_analytics/providers'
 
 export const metadata: Metadata = {
 	title: "Next Gallery",
@@ -41,6 +42,8 @@ export default function RootLayout({
 			routerConfig={extractRouterConfig(ourFileRouter)}
 			/>
 			<body className="flex flex-col h-screen dark">
+			<PostHogProvider>
+
 				<NextSSRPlugin
 					routerConfig={extractRouterConfig(ourFileRouter)}
 				/>
@@ -57,6 +60,8 @@ export default function RootLayout({
 
 				<div id="modal-root"></div>
 				<Toaster />
+			</PostHogProvider>
+
         	</body>
 		</html>
 		</ClerkProvider>
