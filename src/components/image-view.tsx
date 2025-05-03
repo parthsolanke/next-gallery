@@ -1,5 +1,6 @@
 import { getImageById } from "@/server/queries";
 import { clerkClient } from "@clerk/nextjs/server";
+import { DeleteImageButton } from "./delete-button";
 
 export default async function FullImageView(props: {id: number}) {
   const image = await getImageById(props.id);
@@ -15,15 +16,16 @@ export default async function FullImageView(props: {id: number}) {
           className="max-h-[80vh] w-full h-full object-contain"
         />
       </div>
-      <div className="flex flex-col gap-4 w-full md:w-1/3 p-4 items-center text-center">
+      <div className="flex flex-col w-full md:w-1/3 p-2 items-center text-center">
         <h2 className="text-2xl font-bold text-white/90">{image.name}</h2>
         <div className="mt-auto">
-          <p className="text-white">
+          <p className="text-white/60 text-sm">
             Upload date: {new Date(image.createdAt).toLocaleDateString()}
           </p>
-            <p className=" text-white">
-                Uploaded by: {uploaderInfo.fullName}    
-            </p>
+          <p className="text-white/60 text-sm">
+            Uploaded by: {uploaderInfo.fullName}    
+          </p>
+          <DeleteImageButton imageId={image.id} />
         </div>
       </div>
     </div>
