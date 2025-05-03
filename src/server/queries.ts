@@ -1,6 +1,7 @@
 import "server-only";
 import { db } from "@/server/db";
 import { auth } from "@clerk/nextjs/server";
+import { notFound } from "next/navigation";
 
 export async function getMyImages() {
     const user = await auth()
@@ -24,7 +25,9 @@ export async function getImageById(id: number) {
         where: (model, { eq }) => eq(model.id, id),
     });
 
-    if (!image) throw new Error("Image not found");
+    if (!image) {
+        notFound();
+      }
 
     if (image.createdById !== user.userId) throw new Error("User not authorized");
 
