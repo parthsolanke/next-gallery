@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 export function Slot({
-  name,
-  children,
+	name,
+	children,
 }: {
-  name: string;
-  children?: React.ReactNode;
+	name: string;
+	children?: React.ReactNode;
 }) {
-  return <>{children}</>;
+	return <>{children}</>;
 }

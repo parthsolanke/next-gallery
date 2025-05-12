@@ -1,13 +1,13 @@
 import FullImageView from "@/components/image-view";
 
 export default async function PhotoPage({
-  params,
+	params,
 }: {
-  params: Promise<{ id: string }>;
+	params: Promise<{ id: string }>;
 }) {
-  const { id: photoId } = await params;
-  const idASNumber = Number(photoId);
-  if (isNaN(idASNumber)) throw new Error("Invalid photo ID");
+	const { id: photoId } = await params;
+	const idASNumber = Number(photoId);
+	if (isNaN(idASNumber)) throw new Error("Invalid photo ID");
 
-  return <FullImageView id={idASNumber} />
+	return <FullImageView id={idASNumber} />;
 }
